@@ -1,4 +1,10 @@
-version: '3.8'
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  bank-graphql-net:
+    driver: bridge
 
 services:
   postgres:
@@ -18,7 +24,22 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    networks:
+      - bank-graphql-net
 
-volumes:
-  postgres_data:
-    driver: local
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: bank-graphql-backend:latest
+    container_name: bank-graphql-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - bank-graphql-net
+
+
