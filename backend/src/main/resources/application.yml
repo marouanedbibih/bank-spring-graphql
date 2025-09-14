@@ -9,9 +9,9 @@ spring:
   # Datasource
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/bank_graphql_db}
-    username: ${SPRING_DATASOURCE_USERNAME:marouane}
-    password: ${SPRING_DATASOURCE_PASSWORD:Marouane@2001}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
 
   # JPA
   jpa:
@@ -20,7 +20,17 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+  # GraphQL
+  graphql:
+    path: /graphql
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      locations: classpath:graphql/
+      file-extensions: .graphql,.graphqls
+
 # Swagger-UI custom path
 springdoc:
   swagger-ui:
-    path: /index.html
+    path: /index.html 
