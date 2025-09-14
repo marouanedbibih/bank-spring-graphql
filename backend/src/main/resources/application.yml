@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  # Application
+  application:
+    name: bank-graphql
+
+  # Datasource
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/bank_graphql_db}
+    username: ${SPRING_DATASOURCE_USERNAME:marouane}
+    password: ${SPRING_DATASOURCE_PASSWORD:Marouane@2001}
+
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+# Swagger-UI custom path
+springdoc:
+  swagger-ui:
+    path: /index.html
